@@ -11,7 +11,7 @@ export const handlers = [
     return HttpResponse.json({ stats });
   }),
   http.get("/api/people", async () => {
-    await delay(2000);
+    await delay(200);
     return HttpResponse.json({ people });
   }),
   http.get("*", () => {
