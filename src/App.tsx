@@ -1,14 +1,21 @@
 import {
   createBrowserRouter,
+  redirect,
   RouterProvider,
 } from "react-router-dom";
 
 import { useMemo } from "react";
 
+const baseRedirect = {
+  path: "",
+  loader() {
+    return redirect("/team/members")
+  },
+}
+
 const createRouter = () => createBrowserRouter([
   {
     errorElement: <>oops</>,
-    path: "/",
     async loader() {
       const { loader } = await import("./routes/root/loader")
       return loader()
@@ -31,9 +38,11 @@ const createRouter = () => createBrowserRouter([
               const { loader } = await import("./routes/members/loader")
               return loader()
             },
-          }
+          },
+          baseRedirect
         ]
       },
+      baseRedirect
     ],
   },
 ]);
