@@ -1,16 +1,7 @@
 import { Navigation, Person, Stat } from "../types.ts";
 export const navigation: Navigation[] = [
-  { name: "Dashboard", href: "#", icon: "HomeIcon", current: true },
-  { name: "Team", href: "#", icon: "UsersIcon", current: false },
-  { name: "Projects", href: "#", icon: "FolderIcon", current: false },
-  { name: "Calendar", href: "#", icon: "CalendarIcon", current: false },
-  {
-    name: "Documents",
-    href: "#",
-    icon: "DocumentDuplicateIcon",
-    current: false,
-  },
-  { name: "Reports", href: "#", icon: "ChartPieIcon", current: false },
+  { name: "Feed", href: "/feed", icon: "HomeIcon", current: true },
+  { name: "Team", href: "/team/members", icon: "UsersIcon", current: false },
 ];
 
 export const people: Person[] = [
