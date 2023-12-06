@@ -23,7 +23,7 @@ export const handlers = [
     return HttpResponse.json({ feed: localFeed });
   }),
   http.post("/api/feed", async ({ request }) => {
-    await delay(200);
+    await delay(2000);
     const comment = (await request.json()) as Comment;
     localFeed = [...localFeed, { ...comment, id: uuidv4() }];
     return HttpResponse.json({ comment });

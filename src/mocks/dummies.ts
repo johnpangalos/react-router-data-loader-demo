@@ -1,3 +1,5 @@
+import { subDays, subHours } from "date-fns";
+
 import { Navigation, Person, Stat } from "../types.ts";
 import { v4 as uuidv4 } from "uuid";
 
@@ -75,13 +77,14 @@ export const feed = [
     name: "Eduardo Benz",
     comment:
       " ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum nec varius. Et diam cursus quis sed purus nam. ",
-    date: "6d ago",
+    date: +subDays(new Date(), 3),
   },
   {
     id: uuidv4(),
     name: "Jason Meyers",
     comment:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum nec varius. Et diam cursus quis sed purus nam. Scelerisque amet elit non sit ut tincidunt condimentum. Nisl ultrices eu venenatis diam.",
-    date: "2h ago",
+
+    date: +subHours(new Date(), 2),
   },
 ];

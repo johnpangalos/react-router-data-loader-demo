@@ -24,5 +24,5 @@ export type Comment = {
   id: string;
   name: string;
   comment: string;
-  date: string;
+  date: number;
 };
