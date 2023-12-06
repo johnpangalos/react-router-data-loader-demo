@@ -19,3 +19,10 @@ export type Person = {
   email: string;
   role: string;
 };
+
+export type Comment = {
+  id: string;
+  name: string;
+  comment: string;
+  date: string;
+};

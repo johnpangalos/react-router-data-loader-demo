@@ -1,4 +1,6 @@
 import { Navigation, Person, Stat } from "../types.ts";
+import { v4 as uuidv4 } from "uuid";
+
 export const navigation: Navigation[] = [
   { name: "Feed", href: "/feed", icon: "HomeIcon", current: true },
   { name: "Team", href: "/team/members", icon: "UsersIcon", current: false },
@@ -64,5 +66,22 @@ export const stats: Stat[] = [
     previousStat: "28.62%",
     change: "4.05%",
     changeType: "decrease",
+  },
+];
+
+export const feed = [
+  {
+    id: uuidv4(),
+    name: "Eduardo Benz",
+    comment:
+      " ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum nec varius. Et diam cursus quis sed purus nam. ",
+    date: "6d ago",
+  },
+  {
+    id: uuidv4(),
+    name: "Jason Meyers",
+    comment:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum nec varius. Et diam cursus quis sed purus nam. Scelerisque amet elit non sit ut tincidunt condimentum. Nisl ultrices eu venenatis diam.",
+    date: "2h ago",
   },
 ];

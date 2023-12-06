@@ -26,7 +26,15 @@ const createRouter = () =>
       children: [
         {
           path: "feed",
-          Component: () => <>Feed</>,
+          lazy: () => import("./routes/feed/Component"),
+          async loader() {
+            const { loader } = await import("./routes/feed/loader");
+            return loader();
+          },
+          async action(...args) {
+            const { action } = await import("./routes/feed/action");
+            return action(...args);
+          },
         },
         {
           path: "team",
