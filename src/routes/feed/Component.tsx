@@ -1,9 +1,27 @@
+import { formatDistance } from "date-fns";
 import { useLoaderData } from "react-router";
 import { Comment } from "../../types";
-import { Form } from "react-router-dom";
+import { useFetcher } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+import { useRef } from "react";
 
-export default function Example() {
-  const { feed } = useLoaderData() as { feed: Comment[] };
+const COMMENT_SUBMIT_KEY = "comment-submit";
+
+function Example() {
+  let { feed } = useLoaderData() as { feed: Comment[] };
+  const fetcher = useFetcher({ key: COMMENT_SUBMIT_KEY });
+
+  if (fetcher.formData) {
+    const text = fetcher.formData.get("comment");
+    const comment: Comment = {
+      comment: text === null ? "" : text.toString(),
+      name: "Tom Cook",
+      id: uuidv4(),
+      date: +new Date(),
+    };
+    feed = [...feed, comment];
+  }
+
   return (
     <div className="flow-root">
       <ul role="list" className="pt-4">
@@ -15,7 +33,10 @@ export default function Example() {
                   <div>
                     <div className="text-sm">{activityItem.name}</div>
                     <p className="mt-0.5 text-sm text-gray-500">
-                      Commented {activityItem.date}
+                      Commented{" "}
+                      {formatDistance(new Date(activityItem.date), new Date(), {
+                        addSuffix: true,
+                      })}
                     </p>
                   </div>
                   <div className="mt-2 text-sm text-gray-700">
@@ -31,20 +52,26 @@ export default function Example() {
   );
 }
 export function Component() {
+  const fetcher = useFetcher({ key: COMMENT_SUBMIT_KEY });
+  const formRef = useRef<HTMLFormElement>(null);
+
+  if (fetcher.state === "submitting") formRef.current?.reset();
+
   return (
     <>
       <>Feed</>
 
       <Example />
-      <Form method="post">
+      <fetcher.Form method="post" ref={formRef}>
         <label
           htmlFor="comment"
           className="block text-sm font-medium leading-6 text-gray-900"
         >
           Add your comment
         </label>
-        <div className="mt-2">
+        <div className="my-2">
           <textarea
+            placeholder="Your comment goes here!"
             rows={4}
             name="comment"
             id="comment"
@@ -52,8 +79,13 @@ export function Component() {
             defaultValue=""
           />
         </div>
-        <button type="submit">Submit</button>
-      </Form>
+        <button
+          className="rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          type="submit"
+        >
+          Submit
+        </button>
+      </fetcher.Form>
     </>
   );
 }

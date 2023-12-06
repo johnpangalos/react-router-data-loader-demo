@@ -7,7 +7,7 @@ export async function action({ request }: ActionFunctionArgs) {
     body: JSON.stringify({
       comment: formData.get("comment"),
       name: "Tom Cook",
-      data: +new Date(),
+      date: +new Date(),
     }),
   });
 }
